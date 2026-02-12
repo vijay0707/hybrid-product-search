@@ -1,0 +1,42 @@
+[
+  {
+    "query": "hand bag",
+    "lexical_score": 1,
+    "semantic_score": 3,
+    "hybrid_score": 1,
+    "winner": "semantic",
+    "reasoning": "Lexical results are completely empty, making them useless. Hybrid results are mostly irrelevant, consisting of cosmetic bags, toiletry bags, and specialized pouches, not general 'hand bags'. Semantic results, while containing some noise (e.g., 'Potato Chip Bag', 'Toiletry Bag'), are the only ones to return highly relevant items like 'Victoria's Secret Angel Black Handbag Tote Bag' and 'Bestpriceam Women's Tree of Life Printing Canvas Bags Shoulder Bag Zipper Casual Handbag', which directly match the user's intent."
+  },
+  {
+    "query": "women leather purse",
+    "lexical_score": 1,
+    "semantic_score": 3,
+    "hybrid_score": 4,
+    "winner": "hybrid",
+    "reasoning": "Lexical search provided no actual product information, rendering all results completely irrelevant. Semantic search returned some relevant 'purse' items, but also included irrelevant 'mens wallets' and 'pen wraps', and many 'makeup bags' which, while related, are not the primary intent of a 'purse' for money/cards. It also sometimes missed the 'leather' attribute. Hybrid search, despite some noise related to individual keywords (e.g., leather oil, perfume, leggings), offered the most directly relevant 'women leather purse' items in its results, demonstrating the best balance of relevance and query satisfaction."
+  },
+  {
+    "query": "silicone cupping therapy",
+    "lexical_score": 1,
+    "semantic_score": 5,
+    "hybrid_score": 2,
+    "winner": "semantic",
+    "reasoning": "Lexical results are empty, making them completely irrelevant and unusable. Hybrid results include only one relevant item, with the rest being unrelated silicone products (e.g., back scrubbers, bras, sponges, nose pads). Semantic results consistently return highly relevant \"silicone cupping therapy\" products, demonstrating the best understanding of the user's intent, with only one slightly off-topic item (ice roller) and one potentially non-silicone cupping set."
+  },
+  {
+    "query": "beauty massage tool for cellulite",
+    "lexical_score": 1,
+    "semantic_score": 4,
+    "hybrid_score": 2,
+    "winner": "semantic",
+    "reasoning": "Lexical results are completely uninformative, listing only 'All Beauty' category items without any product details. Hybrid results contain a significant amount of noise, including general beauty massage tools (like jade rollers) that are not specifically for cellulite, and anti-cellulite creams/oils which are not 'tools'. Semantic results, despite some minor noise (e.g., hair mask, soap), consistently provide highly relevant 'cellulite massager' tools, directly addressing both 'beauty massage tool' and 'for cellulite' aspects of the query. The top results from the semantic system are perfectly aligned with the user's intent."
+  },
+  {
+    "query": "travel backpack for women",
+    "lexical_score": 1,
+    "semantic_score": 2,
+    "hybrid_score": 2,
+    "winner": "semantic",
+    "reasoning": "Lexical search failed completely, returning no product titles and only category information, making it entirely irrelevant. Both semantic and hybrid systems failed to identify an actual 'travel backpack'. However, they both showed some understanding of 'travel' and 'women', returning various 'travel bags' (e.g., cosmetic bags, toiletry bags, tote bags) and 'travel accessories' along with significant noise. Semantic results were marginally better as they included items like a 'Womens Bamboo Handbag Handmade Large Tote Bag', which, while not a backpack, is a primary carrying bag, alongside other travel-related bags. Hybrid also returned several toiletry/cosmetic bags and travel accessories but included more diverse and distinctly irrelevant items like shoes and decorative bindis. Given the slight edge in 'bag' interpretation and comparable noise, semantic is marginally better than hybrid, while lexical is clearly the worst."
+  }
+]

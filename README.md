@@ -51,6 +51,94 @@ Evaluation Framework (Gemini LLM)
 
 ---
 
+## 🧭 End-to-End Data, Search & Evaluation Flow
+
+```mermaid
+flowchart TD
+
+    A[Amazon Product Data - JSON CSV Dumps]
+
+    B[Bronze Layer - Raw Ingestion - Audit Lineage]
+
+    C[Silver Layer - Clean Normalized Entities - Products Features Images]
+
+    D1[Gold Analytics Marts - Business KPIs]
+    D2[Gold ML Corpus - Search Ready Text]
+
+    E1[BM25 Index - Lexical Search]
+    E2[FAISS Index - Semantic Search]
+
+    F[FastAPI Search APIs - Lexical Semantic Hybrid]
+
+    G[LLM Evaluation - Relevance Win Rate]
+
+    A --> B
+    B --> C
+    C --> D1
+    C --> D2
+    D2 --> E1
+    D2 --> E2
+    E1 --> F
+    E2 --> F
+    F --> G
+```
+
+---
+
+## 🥉🥈🥇 Medallion Architecture (Delta Lake)
+
+This project follows **Databricks Medallion Architecture** to ensure **data quality, scalability, and ML-readiness**.
+
+---
+
+### 🥉 Bronze Layer — Raw Data
+
+**Purpose**
+
+* Preserve raw product data exactly as received
+* Enable replay, lineage, and auditing
+* Act as the immutable source of truth
+
+**Characteristics**
+
+* Schema-on-read
+* Minimal transformation
+* Optimized for ingestion and reliability
+
+---
+
+### 🥈 Silver Layer — Clean & Normalized Data
+
+**Purpose**
+
+* Enforce schemas and data quality
+* Normalize entities and relationships
+* Prepare datasets for analytics and ML
+
+**What lives here**
+
+* Core product entities
+* Features, images, categories, metadata
+* Deduplicated and standardized records
+
+---
+
+### 🥇 Gold Layer — Analytics & Search-Ready Data
+
+**Purpose**
+
+* Business-facing analytics
+* ML-optimized datasets
+* Single source of truth for search indexing
+
+**Gold layer powers**
+
+* BI dashboards & category metrics
+* Search corpus generation
+* Embedding creation for semantic search
+
+---
+
 ## 📦 Dataset
 
 Amazon product data with schema:
@@ -75,11 +163,15 @@ Data is stored and processed in **Databricks Delta tables** and exported for ser
 * Strong for brands, product terms, and precision
 * Implemented using `rank-bm25`
 
+---
+
 ### 2️⃣ Semantic Search (FAISS)
 
 * Meaning-aware retrieval using embeddings
 * Handles synonyms and natural language queries
 * Implemented using `sentence-transformers` + FAISS
+
+---
 
 ### 3️⃣ Hybrid Search (Recommended)
 
@@ -92,6 +184,30 @@ final_score =
 ```
 
 This provides **better relevance than either method alone**.
+
+---
+
+## 🔄 Hybrid Search Execution Flow
+
+```mermaid
+flowchart TD
+
+    Q[User Query]
+
+    L[BM25 Lexical Search]
+    S[FAISS Semantic Search]
+
+    H[Hybrid Re Ranking\nWeighted Score Fusion]
+
+    R[Top K Results]
+
+    Q --> L
+    Q --> S
+    L --> H
+    S --> H
+    H --> R
+
+```
 
 ---
 
@@ -141,13 +257,30 @@ POST /api/search/hybrid
 
 ## 🧪 Evaluation Strategy
 
-Since labeled relevance data is not available, evaluation is done using:
+Since labeled relevance data is unavailable, evaluation is done using **LLM-based judging**.
 
 ### 🧠 LLM-Based Judging (Gemini)
 
 * Scores each system (1–5)
 * Chooses the best system
 * Provides reasoning
+
+```mermaid
+flowchart TD
+
+    Q[Search Query]
+    R[Retrieved Results]
+
+    E[LLM Judge]
+
+    M[Metrics Reports\nWin Rate Scores]
+
+    Q --> R
+    R --> E
+    E --> M
+```
+
+---
 
 ### 📊 Metrics Generated
 
@@ -222,9 +355,16 @@ This repository demonstrates how **modern search systems are actually built**:
 * But **hybrid, evaluated, and production-aware**
 
 ---
+
 ## 🌐 Connect
-Built with ❤️ by 
+
+Built with ❤️ by
 **Vijay Kumar Saravanan**
+
 <p align="left">
-<a href="https://linkedin.com/in/https://www.linkedin.com/in/vijay-kumar-saravanan-71b8561a2/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/vijay-kumar-saravanan-71b8561a2/" height="30" width="40" /></a>
+<a href="https://www.linkedin.com/in/vijay-kumar-saravanan-71b8561a2/" target="blank">
+<img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" height="30" width="40" />
+</a>
 </p>
+
+---
